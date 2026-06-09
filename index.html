@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task: (JS) Map filter Exercise</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e5e5e5;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        
+        .search-div {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-div input {
+            padding: 10px;
+            width: 280px;
+            font-size: 15px;
+        }
+        
+       
+        .student-box {
+            background-color: white;
+            border: 1px solid #999999;
+            padding: 15px;
+            margin: 10px;
+            width: 260px;
+            display: inline-block;
+            vertical-align: top;
+            border-radius: 4px;
+        }
+        
+        .student-box h3 {
+            margin-top: 0;
+            color: #4b0082;
+        }
+        
+        .student-box p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Task: (JS) Map filter Exercise</h1>
+
+    <!-- Search input area -->
+    <div class="search-div">
+        <input type="text" id="myInput" placeholder="Search student by name..." oninput="mySearchFunction()">
+    </div>
+
+    <!-- Div where cards will show -->
+    <div id="cardContainer"></div>
+
+    <script>
+        // Array of student data
+        var students = [
+            { name: "Salman Ahmed", marks: "85%", class: "3rd", address: "India" },
+            { name: "Riya Sharma", marks: "95%", class: "12th", address: "123, ABC Colony, Delhi" },
+            { name: "Rohan Patel", marks: "70%", class: "10th", address: "456, XYZ Street, Mumbai" },
+            { name: "Priya Singh", marks: "88%", class: "8th", address: "789, PQR Nagar, Bangalore" },
+            { name: "Amit Kumar", marks: "60%", class: "5th", address: "101, LMN Road, Kolkata" },
+            { name: "Neha Verma", marks: "92%", class: "11th", address: "222, OPQ Avenue, Chennai" },
+            { name: "Manoj Kumar", marks: "75%", class: "9th", address: "333, GHI Lane, Hyderabad" },
+            { name: "Pooja Mishra", marks: "82%", class: "12th", address: "444, STU Colony, Pune" },
+            { name: "Rajesh Singhania", marks: "50%", class: "7th", address: "555, VWX Street, Jaipur" }
+        ];
+
+        // Map function to show data on screen
+        function displayData(array) {
+            var container = document.getElementById("cardContainer");
+            
+            if (array.length === 0) {
+                container.innerHTML = "<p>No results found</p>";
+                return;
+            }
+
+            var htmlContent = array.map(function(item) {
+                return `
+                    <div class="student-box">
+                        <h3>Student Name: ${item.name}</h3>
+                        <p>Marks: ${item.marks}</p>
+                        <p>Class: ${item.class}</p>
+                        <p>Address: ${item.address}</p>
+                    </div>
+                `;
+            }).join("");
+
+            container.innerHTML = htmlContent;
+        }
+
+        // Filter function for search box
+        function mySearchFunction() {
+            var userInput = document.getElementById("myInput").value.toLowerCase();
+            
+            var filteredData = students.filter(function(item) {
+                return item.name.toLowerCase().includes(userInput);
+            });
+
+            displayData(filteredData);
+        }
+
+        // Run function automatically when page opens
+        displayData(students);
+    </script>
+
+</body>
+</html>
